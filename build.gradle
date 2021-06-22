@@ -2,16 +2,12 @@ buildscript {
 	ext {
 		springBootVersion = '1.5.17.RELEASE'
 	}
-	repositories {
-		jcenter()
-	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
 plugins {
-    id 'com.jfrog.bintray' version '1.8.4'
     id 'com.github.ben-manes.versions' version '0.20.0'
 }
 
@@ -27,18 +23,14 @@ group = 'no.fint'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenLocal()
-	jcenter()
-    maven {
-        url 'http://dl.bintray.com/fint/maven'
-    }
+	// Not actually currently needed..
+	maven {
+		url 'https://repo.fintlabs.no/releases'
+	}
+	mavenCentral()
 }
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
-if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
-	apply from: 'https://raw.githubusercontent.com/FINTlibs/fint-buildscripts/master/bintray.gradle'
 }
